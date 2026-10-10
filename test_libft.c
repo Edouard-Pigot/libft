@@ -66,8 +66,6 @@ static void test_ctype(void)
         }
         if (ft_toupper(c) != toupper(c))
         {
-          fprintf(stderr, "[FAIL] %d\n", toupper(c));
-          fprintf(stderr, "[FAIL] %d\n", ft_toupper(c));
             fprintf(stderr, "[FAIL] ft_toupper(%d)\n", c);
             exit(1);
         }

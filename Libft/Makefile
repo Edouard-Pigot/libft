@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs
 SRCS = $(wildcard *.c)
-OBJS = $(SRCS:.c=.o)
+BUILD_DIR = build
+OBJS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 all: $(NAME)
 
@@ -13,8 +14,11 @@ bonus: all
 $(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o: %.c libft.h
+$(BUILD_DIR)/%.o: %.c libft.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR):
+	mkdir -p $@
 
 clean:
 	rm -f $(OBJS)
